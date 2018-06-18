@@ -4,7 +4,7 @@ from .models import Author, Genre, Book, BookInstance, Language
 
 # admin.site.register(Book)
 # admin.site.register(Author)
-# admin.site.register(Genre)
+admin.site.register(Genre)
 # admin.site.register(BookInstance)
 admin.site.register(Language)
 
@@ -22,7 +22,6 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'display_genre')
     inlines = [BooksInstanceInline]
 
-
 @admin.register(BookInstance) 
 class BookInstanceAdmin(admin.ModelAdmin):
     list_display = ('book', 'status', 'due_back', 'id')
@@ -36,4 +35,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
         }),
     )
 
+def display_genre(self):
+    return ', '.join([ genre.name for genre in self.genre.all()[:3] ])
+display_genre.short_description = 'Genre'
 
