@@ -52,5 +52,4 @@ class AllBorrowedListView(PermissionRequiredMixin,generic.ListView):
     template_name ='catalog/all_borrowed.html'
     paginate_by = 10
     def get_queryset(self):
-        return BookInstance.objects.\
-        filter(status__exact='o').order_by('due_back')
+        return BookInstance.objects.filter(status__exact='o').order_by('due_back')
